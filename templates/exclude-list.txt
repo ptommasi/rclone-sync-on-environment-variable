@@ -1,0 +1,36 @@
+# Files and folders ignored during backup on pCloud
+
+# Synology stuff (bin, snapshot, indexes)
+$RECYCLE.BIN/**
+\#recycle/**
+\#snapshot/**
+@eaDir/**
+@tmp/**
+
+# Mac stuff
+.DS_Store
+.Trashes/**
+.DocumentRevisions-V100/**
+.DocumentRevisions-V100*/**
+.Spotlight-V100/**
+.TemporaryItems/**
+.fseventsd/**
+.journal
+.journal_info_block
+
+# MacOS resource forks (https://forum.rclone.org/t/excluding-macos-resource-files/4539)
+._.DS_Store
+.metadata
+.localized
+.com.apple.timemachine.supported
+.com.apple.timemachine.donotpresent
+._*
+
+# Windows stuff
+ehthumbs.db
+Thumbs.db
+
+# Misc
+.PKInstallSandboxManager/**
+.HFS\+ Private Directory Data
+.picasa.ini

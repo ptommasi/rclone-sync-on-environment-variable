@@ -1,0 +1,23 @@
+## os-specific noise files
+
+### linux flavors
+.directory
+
+### osx
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+### windows
+Desktop.ini
+$RECYCLE.BIN/
+Thumbs.db 
+
+## commonly used temp files and directories
+*.log
+*.pid
+log
+logs
+tmp
+temp
