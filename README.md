@@ -5,26 +5,31 @@ This docker project simply extends [rclone docker image](https://hub.docker.com/
 
 **But why?** I purchased the [pCloud](https://www.pcloud.com/) lifetime offer for 2TB, but I didn't consider how much of a terrible cloud it is. Their connection is _highly_ unreliable (e.g. WebDav is constantly disconnected), their network speed is really slow, there is no good client, thus _pCloud might offer 2TB, but it's really difficult to really use them_. [rclone](https://rclone.org/) made up for all this shortcoming, proving itself a very reliable tool, and this image is just a bridge for an easier usage (run it in the background, just check the result once finished).
 
+Prebuilt image is [available on dockerhub](https://hub.docker.com/repository/docker/pierpytom/rclone-sync-on-environment-variable/general), you can simply pull `pierpytom/rclone-sync-on-environment-variable:latest` from docker. 
 
 Final Usage (once configured)
 -----------------------------
 
 I'm going out of order here, but the final goal of this image is to have one or more containers that can be simply started and will take care of backing up your data, dying at completion (while preserving logs).
 
-Since I'm a DSM user, what I'm talking about is having a configuration like the one below:
+Since I'm a DSM user, what I'm talking about is having a configuration which looks like this:
 
 ![Docker on DSM](./images/synology-docker-containers.png)
 
-Where you simply start one of the backup containers to sync your data with pCloud (in my case, rclone is a great piece of software, you can target any cloud).
+Where you simply start one of the backup containers to sync your data with pCloud (in my case, rclone is a great piece of software, but in reality you can target any cloud).
 
 And this is the content of the folder on the NAS:
 ![Container Folder](./images/synology-folder.png)
 
-Basically I have all the script and logs in one folder (mounted on all volumes), I use the `EXEC_SCRIPT` environment variable to pick the correct configuration, and I follow the logs directly from the NAS.
+Basically I have all the scripts and logs in one folder on the NAS (which is mounted on all containers, they also share the same rclone configuration after all), I use the `EXEC_SCRIPT` environment variable to pick the correct configuration, and I follow the logs directly from the NAS.
 
 
 Container Setup
 ---------------
+
+Either `docker pull pierpytom/rclone-sync-on-environment-variable:latest` or, on DSM, search for `pierpytom` instead and then download the project (weirdly, the whole string won't have a match):
+![Docker Registry](./images/docker-registry.png)
+
 
 These are the volumes I recommend to mount:
  - **backup data:** The original data you want to backup under something like `/nas_data`, but in **read-only mode** (always give the least permissions, better safe than sorry)
